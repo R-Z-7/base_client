@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 
 import 'package:base_client/services/app_exceptions.dart';
@@ -12,8 +14,9 @@ class BaseClient {
   Future<dynamic> get(String baseUrl, String api) async {
     var uri = Uri.parse(baseUrl + api);
     try {
-      var response =
-          await http.get(uri).timeout(Duration(seconds: TIME_OUT_DURATION));
+      var response = await http
+          .get(uri)
+          .timeout(const Duration(seconds: TIME_OUT_DURATION));
       return _processResponse(response);
     } on SocketException {
       FetchDataException('No inernet Connection', uri.toString());
@@ -30,7 +33,7 @@ class BaseClient {
     try {
       var response = await http
           .post(uri, body: payload)
-          .timeout(Duration(seconds: TIME_OUT_DURATION));
+          .timeout(const Duration(seconds: TIME_OUT_DURATION));
       return _processResponse(response);
     } on SocketException {
       FetchDataException('No inernet Connection', uri.toString());
